@@ -46,10 +46,25 @@ userSchema.pre('save', function (next) {
       .catch((err) => {
         next(err);
       });
+  }else{
+    next()
   }
-  next()
+  
 });
 
+
+// userSchema.pre("save",function(next){
+//   var user = this
+//   // check weather password filed is modified
+//   if(user.isModified("password")){
+//     bcrypt.hash(user.password,10).then(hashPassword=>{
+//       user.password = hashPassword
+//       next()
+//     }).catch(err=>{
+//       next(err)
+//     })
+//   }
+// })
 userSchema.pre('remove', function (next) {
   Bug.deleteMany({ user: this._id })
     .then((reaponce) => {
